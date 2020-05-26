@@ -1,0 +1,29 @@
+{
+  "defaults": {
+    "project": 1,
+    "env": 1
+  },
+  "actives": {
+    "project": 1,
+    "env": 1
+  },
+  "projects": [
+    {
+      "idx": 1,
+      "id": 6304000000067046,
+      "name": "BickertOAuthHandler",
+      "domain": {
+        "id": 10019999015,
+        "name": "bickertoauthhandler-713530616.development"
+      },
+      "env": [
+        {
+          "idx": 1,
+          "id": "713530616",
+          "name": "Development",
+          "type": 3
+        }
+      ]
+    }
+  ]
+}

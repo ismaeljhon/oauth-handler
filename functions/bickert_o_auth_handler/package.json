@@ -1,0 +1,11 @@
+{
+	"name": "bickert_o_auth_handler",
+	"version": "1.0.0",
+	"main": "index.js",
+	"author": "ismael@bickertmanagement.com",
+	"dependencies": {
+		"axios": "^0.19.2",
+		"lodash": "^4.17.15",
+		"zcatalyst-sdk-node": "latest"
+	}
+}

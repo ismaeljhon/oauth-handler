@@ -6,6 +6,7 @@ export default {
         prompt: "consent",
         grant_type: "authorization_code",
         redirect_uri: "https://bickertoauthhandler-713530616.development.zohocatalyst.com/app/index.html#/callback",
+        zoho_catalyst_function_handler: "https://bickertoauthhandler-713530616.development.zohocatalyst.com/baas/v1/project/6304000000067046/function/6304000000074222/execute"
     },
     forms: [
         { name: 'client_id', label: 'Client ID', type: 'text' },
@@ -36,7 +37,7 @@ export default {
             formFieldsAllowed: ['client_id', 'client_secret'],
 
             /** Params needed for getting [refresh_token] for authorization */
-            params: ['client_id', 'client_secret', 'code', 'grant_type', 'redirect_uri']
+            params: ['client_id', 'client_secret', 'code', 'grant_type', 'redirect_uri'],
         }
     },
 }

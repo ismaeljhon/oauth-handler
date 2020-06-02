@@ -21,7 +21,13 @@
           "idx": 1,
           "id": "713530616",
           "name": "Development",
-          "type": 3
+          "type": 3,
+          "env_status": "Active",
+          "project_details": {
+            "project_name": "BickertOAuthHandler",
+            "id": 6304000000067046
+          },
+          "is_default": true
         }
       ]
     }

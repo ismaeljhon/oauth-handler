@@ -39,6 +39,7 @@
 
 import Utils from '@/mixins/Utils'
 import _merge from 'lodash/merge'
+import _assign from 'lodash/assign'
 import axios from 'axios'
 
 export default {
@@ -75,11 +76,19 @@ export default {
         },
         getRefreshToken() {
             localStorage.paramsNeeded = ""
+            
+            let oauthHandlerFunctionUrl = this.config.params.zoho_catalyst_function_handler
 
-            return axios.post(this.config.requiredFields.getAuthorization.oauth_url, null, { params: this.form }).then(response => {
-                this.data = response.data
+            _assign(this.form, {
+                oauth_url: this.config.requiredFields.getAuthorization.oauth_url,
+                params: this.config.requiredFields.getAuthorization.params
+            })
+
+            return axios.post(oauthHandlerFunctionUrl, { oauthForm: this.form }).then(response => {
+                let data = response.data.output || {}
+                this.data = JSON.parse(data)
             }).catch(error => {
-                console.log(error)
+                console.log(error.response.data)
             })
         },
         download() {

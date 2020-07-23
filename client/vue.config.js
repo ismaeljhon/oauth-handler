@@ -3,7 +3,8 @@ module.exports = {
   "transpileDependencies": [
     "vuetify"
   ],
-  publicPath: "./",
+  // publicPath: "./",
+  publicPath: process.env.NODE_ENV == "production" ? "/" : "./",
   // devServer: {
   //   https: {
   //     key: fs.readFileSync('./certs/server.key'),

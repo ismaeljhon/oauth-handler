@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Home from '@/views/Home.vue'
+import Callback from '@/views/oauth/callback.vue'
 
 Vue.use(VueRouter)
 
@@ -26,7 +27,7 @@ Vue.use(VueRouter)
   {
     path: '/callback',
     name: 'Callback',
-    component: () => import('@/views/oauth/callback.vue')
+    component: Callback
   },
 ]
 

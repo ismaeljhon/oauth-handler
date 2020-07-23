@@ -75,8 +75,6 @@ export default {
             })
         },
         getRefreshToken() {
-            localStorage.paramsNeeded = ""
-            
             let oauthHandlerFunctionUrl = this.config.params.zoho_catalyst_function_handler
 
             _assign(this.form, {
@@ -86,7 +84,13 @@ export default {
 
             return axios.post(oauthHandlerFunctionUrl, { oauthForm: this.form }).then(response => {
                 let data = response.data.output || {}
-                this.data = JSON.parse(data)
+
+                let paramsNeeded = localStorage.getItem('paramsNeeded') || {}
+                paramsNeeded = JSON.parse(paramsNeeded)
+                let additionalData = this.getParams(paramsNeeded, this.config.requiredFields.responseAdditionalData)
+                this.data = _assign(JSON.parse(data), additionalData)
+
+                localStorage.paramsNeeded = ""
             }).catch(error => {
                 console.log(error.response.data)
             })

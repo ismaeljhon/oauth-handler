@@ -1,7 +1,9 @@
 <template>
     <div class="mt-5">
-        <v-btn @click.prevent="back" class="mr-4 mb-10"><v-icon class="mr-1">mdi-arrow-left</v-icon>back</v-btn>
-        <v-card>
+        <v-alert icon="file_copy" type="info" outlined text>
+            Don't forget to include this <strong style="text-decoration: underline">{{ redirectUri }}</strong> on your redirect uri or authorized url upon creating your app
+        </v-alert>
+        <v-card class="mt-5">
             <v-card-title>OAuth 2.0 Authorization</v-card-title>
             <v-card-text v-if="config">
                 <ValidationObserver ref="observer" v-slot="{ handleSubmit }">
@@ -17,6 +19,7 @@
                             </ValidationProvider>
                         </div>
                         <div class="mt-10">
+                            <v-btn @click.prevent="back" class="mr-3"><v-icon class="mr-1">mdi-arrow-left</v-icon>back</v-btn>
                             <v-btn type="submit" color="primary"><v-icon class="mr-1">mdi-check</v-icon>submit</v-btn>
                         </div>
                     </form>
@@ -70,6 +73,11 @@ export default {
         let config = await import('@/shared/' + this.form.type + '.config.js')
 
         this.config = config.default
+    },
+    computed: {
+        redirectUri() {
+            return this.config && this.config.params && this.config.params.redirect_uri ? this.config.params.redirect_uri : null
+        }
     }
 }
 </script>

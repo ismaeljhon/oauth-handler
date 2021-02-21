@@ -3,20 +3,10 @@
         <v-card v-if="data">
             <v-card-title>Authorization 2.0 Response</v-card-title>
             <v-card-text>
-                <v-list>
-                    <div v-for="(item, index) in data" :key="index">
-                        <v-list-item class="px-0">
-                            <v-list-item-content>
-                                <v-list-item-title>{{ beautifyStr(index) }}</v-list-item-title>
-                                <v-list-item-subtitle>
-                                    <span>{{ item }}</span><br>
-                                    <v-btn x-small color="secondary">Click here to copy</v-btn>
-                                </v-list-item-subtitle>
-                            </v-list-item-content>
-                        </v-list-item>
-                        <v-divider></v-divider>
-                    </div>
-                </v-list>
+                <div v-for="(item, index) in data" :key="index">
+                    <v-text-field :label="beautifyStr(index)" readonly :id="index" :value="item" append-icon="file_copy" @click:append="copyToClipboard(index)">
+                    </v-text-field>
+                </div>
             </v-card-text>
            <v-card-actions class="pb-5">
                 <v-btn color="primary" @click.prevent="download"><v-icon class="mr-1">mdi-download</v-icon> Download</v-btn>
@@ -32,6 +22,15 @@
             ></v-progress-linear>
             <small>Please don't refresh or go to another page</small>
         </div>
+
+        <v-snackbar v-model="snackbar" :timeout="1000" top color="success">
+            Code copied successfully
+            <template v-slot:action="{ attrs }">
+                <v-btn color="red" text v-bind="attrs" @click="snackbar = false">
+                    Close
+                </v-btn>
+            </template>
+        </v-snackbar>
     </div>
 </template>
 
@@ -49,7 +48,8 @@ export default {
         return {
             form: {},
             config: {},
-            data: null
+            data: null,
+            snackbar: false
         }
     },
     methods: {
@@ -108,6 +108,20 @@ export default {
             a.dataset.downloadurl = ['text/json', a.download, a.href].join(':');
             e.initEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
             a.dispatchEvent(e);
+        },
+        copyToClipboard(targetElement) {
+            /* Get the text field */
+            var copyText = document.getElementById(targetElement);
+
+            /* Select the text field */
+            copyText.select();
+            copyText.setSelectionRange(0, 99999); /*For mobile devices*/
+
+            /* Copy the text inside the text field */
+            document.execCommand("copy");
+
+            /* Alert the copied text */
+            this.snackbar = true
         }
     },
     async mounted() {

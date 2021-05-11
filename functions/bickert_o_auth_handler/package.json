@@ -5,7 +5,7 @@
 	"author": "ismael@bickertmanagement.com",
 	"dependencies": {
 		"axios": "^0.19.2",
-		"lodash": "^4.17.15",
+		"lodash": "^4.17.21",
 		"zcatalyst-sdk-node": "latest"
 	}
 }
